@@ -1,5 +1,4 @@
-
-
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=c22211520-Alvarez/MSFP4)
 # Práctica 4: Modelado y control del sistema endócrino
 
 Repositorio académico de la asignatura **Modelado de Sistemas Fisiológicos**, correspondiente al programa de **Ingeniería Biomédica** del Tecnológico Nacional de México / Instituto Tecnológico de Tijuana. Esta práctica integra el modelado matemático mediante analogías eléctricas, el análisis de estabilidad, el diseño de controladores clásicos, la experimentación *in silico* (Simulink y Python) y la comprobación física en el Laboratorio de Electrónica enfocada en el sistema endócrino.
@@ -45,7 +44,7 @@ El caso de estudio representa la dinámica de secreción, transporte y respuesta
 
 El modelado de sistemas fisiológicos permite comprender la dinámica del cuerpo humano y evaluar estrategias de control. En esta práctica, se analiza una representación fenomenológica del sistema endócrino. El sistema considera una señal de entrada que estimula la secreción hormonal, un elemento resistivo que representa pérdidas, un capacitor que simula la acumulación temporal de la hormona y una rama inductiva-resistiva que representa el retardo o inercia de la respuesta del tejido diana.
 
-Mediante la **analogía eléctrica**, se evalúan dos condiciones fisiológicas: un individuo sano (control, \(R_2 = 100\text{ k}\Omega\), \(C = 1\ \mu\text{F}\)) y un caso simulado de alteración (caso, \(R_2 = 1\text{ k}\Omega\), \(C = 1000\ \mu\text{F}\)). Utilizando la respuesta del individuo sano como referencia, se diseña un controlador para reducir el error. El desarrollo se realiza *in silico* mediante MATLAB/Simulink y Python, y se contrasta con la implementación física en el laboratorio de electrónica, complementado con un diagrama fisiológico elaborado en BioRender.
+Mediante la **analogía eléctrica**, se evalúan dos condiciones fisiológicas: un individuo sano (control, $R_2 = 100\text{ k}\Omega$, $C = 1\ \mu\text{F}$) y un caso simulado de alteración (caso, $R_2 = 1\text{ k}\Omega$, $C = 1000\ \mu\text{F}$). Utilizando la respuesta del individuo sano como referencia, se diseña un controlador para reducir el error. El desarrollo se realiza *in silico* mediante MATLAB/Simulink y Python, y se contrasta con la implementación física en el laboratorio de electrónica, complementado con un diagrama fisiológico elaborado en BioRender.
 
 **Palabras clave:** Sistema endócrino; Analogía eléctrica; Secreción hormonal; Controlador PI/PID; Simscape Electrical; Python; BioRender; Laboratorio de electrónica.
 
@@ -91,13 +90,13 @@ El sistema endócrino se aproxima mediante un circuito eléctrico cuyas equivale
 
 | Parámetro | Control (Sano) | Caso (Alterado) | Interpretación Fisiológica |
 | :--- | :---: | :---: | :--- |
-| **\(V_e(t)\)** | Escalón unitario | Escalón unitario | Estímulo para la secreción hormonal |
-| **\(R_1\)** | \(1\ \text{k}\Omega\) | \(1\ \text{k}\Omega\) | Pérdidas y oposición durante el transporte |
-| **\(C\)** | \(1\ \mu\text{F}\) | \(1000\ \mu\text{F}\) | Acumulación temporal de hormona |
-| **\(L\)** | \(100\ \text{mH}\) | \(100\ \text{mH}\) | Retardo o inercia de la respuesta del tejido diana |
-| **\(R_2\)** | \(100\ \text{k}\Omega\) | \(1\ \text{k}\Omega\) | Utilización, disipación o eliminación de la señal |
+| **$V_e(t)$** | Escalón unitario | Escalón unitario | Estímulo para la secreción hormonal |
+| **$R_1$** | $1\ \text{k}\Omega$ | $1\ \text{k}\Omega$ | Pérdidas y oposición durante el transporte |
+| **$C$** | $1\ \mu\text{F}$ | $1000\ \mu\text{F}$ | Acumulación temporal de hormona |
+| **$L$** | $100\ \text{mH}$ | $100\ \text{mH}$ | Retardo o inercia de la respuesta del tejido diana |
+| **$R_2$** | $100\ \text{k}\Omega$ | $1\ \text{k}\Omega$ | Utilización, disipación o eliminación de la señal |
 
-*La modificación de \(R_2\) y \(C\) en el caso altera la dinámica de la respuesta hormonal.*
+*La modificación de $R_2$ y $C$ en el caso altera la dinámica de la respuesta hormonal.*
 
 [Volver al contenido](#contenido)
 
@@ -106,50 +105,49 @@ El sistema endócrino se aproxima mediante un circuito eléctrico cuyas equivale
 <a id="modelo"></a>
 ## Formulación matemática
 
-*(Nota: El desarrollo paso a paso se encuentra en los apuntes anexos y en el Live Script).*
+A partir del análisis del circuito equivalente, aplicando las leyes de Kirchhoff, se obtienen las ecuaciones integro-diferenciales que rigen el sistema:
 
-A partir del análisis del circuito equivalente (Figura 5.5 del cuaderno), aplicando las leyes de Kirchhoff, se obtienen las ecuaciones integro-diferenciales que rigen el sistema:
+**1. Ecuación de voltaje en la entrada:**
+$$
+V_e(t) = R_1 F_e(t) + \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt
+$$
 
-**1. Ecuación de voltaje en la entrada (malla izquierda):**
-\[
- V_e(t) = R_1 F_e(t) + \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt 
-\]
-
-**2. Ecuación de voltaje en la salida (malla derecha):**
-\[
- V_s(t) = L \frac{dF_s(t)}{dt} + R_2 F_s(t) = \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt 
-\]
+**2. Ecuación de voltaje en la salida:**
+$$
+V_s(t) = L \frac{dF_s(t)}{dt} + R_2 F_s(t) = \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt
+$$
 
 ### Procedimiento Algebraico (Transformada de Laplace)
 
 Aplicando Laplace con condiciones iniciales nulas y agrupando términos:
 
-\[
- V_e(s) = F_e(s) \left( R_1 + \frac{1}{Cs} \right) - F_s(s) \left( \frac{1}{Cs} \right) 
-\]
+$$
+V_e(s) = F_e(s) \left( R_1 + \frac{1}{Cs} \right) - F_s(s) \left( \frac{1}{Cs} \right)
+$$
 
-\[
- V_s(s) = F_s(s)(Ls + R_2) = F_e(s)\left(\frac{1}{Cs}\right) - F_s(s)\left(\frac{1}{Cs}\right) 
-\]
+$$
+V_s(s) = F_s(s)(Ls + R_2) = F_e(s)\left(\frac{1}{Cs}\right) - F_s(s)\left(\frac{1}{Cs}\right)
+$$
 
-Despejando \(F_e(s)\) de la segunda ecuación y sustituyendo en la primera, se obtiene:
+Despejando $F_e(s)$ de la segunda ecuación y sustituyendo en la primera, se obtiene:
 
-\[
- F_e(s) = F_s(s) (CLs^2 + CsR_2 + 1) 
-\]
+$$
+F_e(s) = F_s(s) (CLs^2 + CsR_2 + 1)
+$$
 
-Sustituyendo en \(V_e(s)\) y simplificando, llegamos a la **Función de Transferencia** final:
+Sustituyendo en $V_e(s)$ y simplificando, llegamos a la **Función de Transferencia** final:
 
-\[
- G(s) = \frac{V_s(s)}{V_e(s)} = \frac{Ls + R_2}{CLs^2 R_1 + (CR_1 R_2 + L)s + (R_1 + R_2)} 
-\]
+$$
+G(s) = \frac{V_s(s)}{V_e(s)} = \frac{Ls + R_2}{CLs^2 R_1 + (CR_1 R_2 + L)s + (R_1 + R_2)}
+$$
 
 ### Ecuación Diferencial (EDO)
+
 Invirtiendo la función de transferencia, la EDO que rige la dinámica del sistema es:
 
-\[
- CL R_1 \frac{d^2 V_s(t)}{dt^2} + (CR_1 R_2 + L) \frac{d V_s(t)}{dt} + (R_1 + R_2) V_s(t) = L \frac{d V_e(t)}{dt} + R_2 V_e(t) 
-\]
+$$
+CL R_1 \frac{d^2 V_s(t)}{dt^2} + (CR_1 R_2 + L) \frac{d V_s(t)}{dt} + (R_1 + R_2) V_s(t) = L \frac{d V_e(t)}{dt} + R_2 V_e(t)
+$$
 
 [Volver al contenido](#contenido)
 
@@ -158,9 +156,9 @@ Invirtiendo la función de transferencia, la EDO que rige la dinámica del siste
 <a id="analisis"></a>
 ## Análisis temporal y de estabilidad
 
-- **Polos y estabilidad:** El denominador de la función de transferencia es de segundo grado. Al sustituir los valores de los componentes para ambos casos, los polos se encuentran en el semiplano izquierdo del plano complejo \(s\), garantizando un sistema estable.
-- **Error en estado estacionario:** Al evaluar el límite de \(sG(s)\) cuando \(s \to 0\), el sistema se comporta como un sistema tipo 1 (integrador), por lo que el error teórico ante una entrada escalón es cero.
-- **Diferencia dinámica:** El caso alterado (con \(C=1000\ \mu\text{F}\)) presentará una respuesta mucho más lenta (mayor constante de tiempo) y con mayor amplitud que el control sano.
+- **Polos y estabilidad:** El denominador de la función de transferencia es de segundo grado. Al sustituir los valores de los componentes para ambos casos, los polos se encuentran en el semiplano izquierdo del plano complejo $s$, garantizando un sistema estable.
+- **Error en estado estacionario:** Al evaluar el límite de $sG(s)$ cuando $s \to 0$, el sistema se comporta como un sistema tipo 1 (integrador), por lo que el error teórico ante una entrada escalón es cero.
+- **Diferencia dinámica:** El caso alterado (con $C=1000\ \mu\text{F}$) presentará una respuesta mucho más lenta (mayor constante de tiempo) y con mayor amplitud que el control sano.
 
 [Volver al contenido](#contenido)
 
@@ -182,19 +180,19 @@ Se construyeron las siguientes representaciones equivalentes en Simulink:
 ## Control en lazo cerrado y sintonización
 
 Se implementó un controlador en Simulink con retroalimentación negativa. La señal de error se define como:
-\[
- e(t) = V_{s,\text{control}}(t) - V_{s,\text{caso}}(t) 
-\]
+$$
+e(t) = V_{s,\text{control}}(t) - V_{s,\text{caso}}(t)
+$$
 
 **Ganancias Sintonizadas (Herramienta Tune):**
-*(Nota: Insertar aquí las ganancias finales \(K_p\) y \(K_i\) o \(K_d\) utilizadas en tu Simulink)*
-- **\(k_P\):** `[Valor]`
-- **\(k_I\):** `[Valor]`
-- **\(k_D\):** `[Valor]`
+*(Nota: Insertar aquí las ganancias finales utilizadas en tu Simulink)*
+- **$k_P$:** `[Valor]`
+- **$k_I$:** `[Valor]`
+- **$k_D$:** `[Valor]`
 
 **Criterios de desempeño alcanzados:**
-- Tiempo de establecimiento (\(t_s\)): `[Valor]` s.
-- Sobreimpulso (\(M_p\)): `[Valor]` %.
+- Tiempo de establecimiento ($t_s$): `[Valor]` s.
+- Sobreimpulso ($M_p$): `[Valor]` %.
 
 [Volver al contenido](#contenido)
 
@@ -204,7 +202,7 @@ Se implementó un controlador en Simulink con retroalimentación negativa. La se
 ## Reproducción en Python
 
 Se implementó el siguiente código en Python (usando `control` y `matplotlib`) para verificar los resultados:
-1. Definición del vector temporal con un paso de \(1\times10^{-3}\) s.
+1. Definición del vector temporal con un paso de $1\times10^{-3}$ s.
 2. Definición de las funciones de transferencia para el control y el caso.
 3. Simulación de la respuesta en lazo abierto ante un escalón unitario.
 4. Incorporación del controlador y simulación del lazo cerrado (usando `ctrl.feedback`).
@@ -218,11 +216,11 @@ Se implementó el siguiente código en Python (usando `control` y `matplotlib`) 
 ## Controlador analógico y laboratorio
 
 ### Materiales y equipo
-- Resistencias (\(1\text{k}\Omega\), \(100\text{k}\Omega\), y las calculadas para el PID).
-- Capacitores (\(1\ \mu\text{F}\), \(1000\ \mu\text{F}\), y los del PID).
-- Inductor de \(100\ \text{mH}\) (o el valor comercial disponible).
+- Resistencias ($1\text{k}\Omega$, $100\text{k}\Omega$, y las calculadas para el PID).
+- Capacitores ($1\ \mu\text{F}$, $1000\ \mu\text{F}$, y los del PID).
+- Inductor de $100\ \text{mH}$ (o el valor comercial disponible).
 - Amplificadores operacionales (LM741 o TL081).
-- Generador de funciones, fuente de alimentación simétrica (\(\pm15\text{V}\)) y osciloscopio.
+- Generador de funciones, fuente de alimentación simétrica ($\pm15\text{V}$) y osciloscopio.
 
 ### Implementación
 1. **Lazo Abierto:** Se construyó el circuito Caso y el circuito Control por separado. Se aplicó un pulso o escalón y se registraron las salidas.
@@ -253,7 +251,7 @@ En este diagrama se ilustra:
 - La glándula secretora y el torrente sanguíneo (transporte).
 - El órgano diana y los receptores.
 - La retroalimentación negativa fisiológica.
-- El mapeo de los componentes: \(V_e\) (estímulo), \(R_1\) (transporte), \(C\) (almacenamiento/acumulación), \(L\) (inercia de respuesta del órgano diana) y \(R_2\) (eliminación/utilización).
+- El mapeo de los componentes: $V_e$ (estímulo), $R_1$ (transporte), $C$ (almacenamiento/acumulación), $L$ (inercia de respuesta del órgano diana) y $R_2$ (eliminación/utilización).
 
 *El archivo PDF original del diagrama se encuentra anexado en este repositorio.*
 
