@@ -34,8 +34,7 @@ El caso de estudio representa la dinámica de secreción, transporte y respuesta
 11. [Controlador analógico y laboratorio](#laboratorio)
 12. [Resultados y verificación cruzada](#resultados)
 13. [Diagrama Fisiológico (BioRender)](#biorender)
-14. [Estructura del repositorio](#estructura)
-15. [Referencias](#referencias)
+14. [Referencias](#referencias)
 
 ---
 
@@ -186,9 +185,9 @@ $$
 
 **Ganancias Sintonizadas (Herramienta Tune):**
 *(Nota: Insertar aquí las ganancias finales utilizadas en tu Simulink)*
-- **$k_P$:** `[Valor]`
-- **$k_I$:** `[Valor]`
-- **$k_D$:** `[Valor]`
+- **$k_P$:** `259.663557`
+- **$k_I$:** `12483.078265`
+- **$k_D$:** `0.173851`
 
 **Criterios de desempeño alcanzados:**
 - Tiempo de establecimiento ($t_s$): `[Valor]` s.
@@ -259,23 +258,6 @@ En este diagrama se ilustra:
 
 ---
 
-<a id="estructura"></a>
-## Estructura del repositorio
-
-.
-├── README.md                      # Este archivo
-├── AlvarezC22211520.mlx           # Cuaderno computacional (Live Script)
-├── AlvarezC22211520.py            # Implementación en Python
-├── SistemaEndocrino.slx           # Modelo de Simulink
-├── Analisis_Matematico.pdf        # Apuntes del procedimiento algebraico
-├── Diagrama_BioRender.pdf         # Diagrama fisiológico
-├── Tratamiento_matlab.pdf         # Gráfica exportada de MATLAB
-├── Tratamiento_python.pdf         # Gráfica exportada de Python
-└── evidencias_laboratorio/        # Fotos y capturas del osciloscopio
-
-[Volver al contenido](#contenido)
-
----
 <a id="referencias"></a>
 
 Referencias
