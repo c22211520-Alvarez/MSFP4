@@ -107,14 +107,10 @@ El sistema endócrino se aproxima mediante un circuito eléctrico cuyas equivale
 A partir del análisis del circuito equivalente, aplicando las leyes de Kirchhoff, se obtienen las ecuaciones integro-diferenciales que rigen el sistema:
 
 **1. Ecuación de voltaje en la entrada:**
-$$
-V_e(t) = R_1 F_e(t) + \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt
-$$
+$V_e(t) = R_1 F_e(t) + \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt$
 
 **2. Ecuación de voltaje en la salida:**
-$$
-V_s(t) = L \frac{dF_s(t)}{dt} + R_2 F_s(t) = \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt
-$$
+$V_s(t) = L \frac{dF_s(t)}{dt} + R_2 F_s(t) = \frac{1}{C} \int (F_e(t) - F_s(t)) \, dt$
 
 ### Procedimiento Algebraico (Transformada de Laplace)
 
