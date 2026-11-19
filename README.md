@@ -95,7 +95,7 @@ El sistema endócrino se aproxima mediante un circuito eléctrico cuyas equivale
 | **$L$** | $100\ \text{mH}$ | $100\ \text{mH}$ | Retardo o inercia de la respuesta del tejido diana |
 | **$R_2$** | $100\ \text{k}\Omega$ | $1\ \text{k}\Omega$ | Utilización, disipación o eliminación de la señal |
 
-*La modificación de $R_2$ y $C$ en el caso altera la dinámica de la respuesta hormonal.*
+*La modificación de R2 y C en el caso altera la dinámica de la respuesta hormonal.*
 
 [Volver al contenido](#contenido)
 
