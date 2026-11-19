@@ -184,14 +184,10 @@ e(t) = V_{s,\text{control}}(t) - V_{s,\text{caso}}(t)
 $$
 
 **Ganancias Sintonizadas (Herramienta Tune):**
-*(Nota: Insertar aquí las ganancias finales utilizadas en tu Simulink)*
 - **$k_P$:** `259.663557`
 - **$k_I$:** `12483.078265`
 - **$k_D$:** `0.173851`
 
-**Criterios de desempeño alcanzados:**
-- Tiempo de establecimiento ($t_s$): `[Valor]` s.
-- Sobreimpulso ($M_p$): `[Valor]` %.
 
 [Volver al contenido](#contenido)
 
