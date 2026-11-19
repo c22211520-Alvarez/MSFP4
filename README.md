@@ -3,7 +3,7 @@
 
 Repositorio académico de la asignatura **Modelado de Sistemas Fisiológicos**, correspondiente al programa de **Ingeniería Biomédica** del Tecnológico Nacional de México / Instituto Tecnológico de Tijuana. Esta práctica integra el modelado matemático mediante analogías eléctricas, el análisis de estabilidad, el diseño de controladores clásicos, la experimentación *in silico* (Simulink y Python) y la comprobación física en el Laboratorio de Electrónica enfocada en el sistema endócrino.
 
-El caso de estudio representa la dinámica de secreción, transporte y respuesta hormonal mediante un circuito eléctrico equivalente de segundo orden. Se compara la respuesta de un individuo sano (control) frente a un caso simulado de alteración endócrina, aplicando un controlador PI/PID para mitigar la diferencia entre ambas respuestas.
+El caso de estudio representa la dinámica de secreción, transporte y respuesta hormonal mediante un circuito eléctrico equivalente de segundo orden. Se compara la respuesta de un individuo sano (control) frente a un caso simulado de alteración endócrina, aplicando un controlador PID para mitigar la diferencia entre ambas respuestas.
 
 **Docente:** Dr. Paul Antonio Valle Trujillo  
 **Correo:** paul.valle@tectijuana.edu.mx  
@@ -62,7 +62,7 @@ Modeliza sistemas fisiológicos mediante analogías eléctricas, ecuaciones dife
 - Obtener el modelo de ecuaciones integro-diferenciales y la función de transferencia del control y del caso.
 - Evaluar la estabilidad y el error en estado estacionario de ambos escenarios.
 - Implementar el modelo en Simulink (ecuaciones, función de transferencia y circuito) y Python.
-- Sintonizar un controlador PI/PID para reducir la diferencia entre el caso alterado y la referencia sana.
+- Sintonizar un controlador PID para reducir la diferencia entre el caso alterado y la referencia sana.
 - Elaborar un diagrama biológico del sistema en BioRender.
 - Implementar el controlador analógico y el circuito en el laboratorio físico.
 
@@ -76,7 +76,7 @@ Modeliza sistemas fisiológicos mediante analogías eléctricas, ecuaciones dife
 La práctica integra contenidos correspondientes a tres unidades de la asignatura **Modelado de Sistemas Fisiológicos (IBF-1020)**:
 - **Unidad I (Sistemas de control retroalimentados):** Análisis de error, estabilidad y diagramas de bloques.
 - **Unidad II (Modelado matemático):** Analogía eléctrica del sistema endócrino, leyes de Kirchhoff y función de transferencia.
-- **Unidad III (Controladores):** Diseño y sintonización de controladores clásicos (PI/PID).
+- **Unidad III (Controladores):** Diseño y sintonización de controladores clásicos (PID).
 
 [Volver al contenido](#contenido)
 
@@ -215,7 +215,7 @@ Se implementó el siguiente código en Python (usando `control` y `matplotlib`) 
 
 ### Implementación
 1. **Lazo Abierto:** Se construyó el circuito Caso y el circuito Control por separado. Se aplicó un pulso o escalón y se registraron las salidas.
-2. **Lazo Cerrado:** Se construyó el restador (usando un buffer/seguidor de voltaje para el control), el controlador analógico (PI) y el sumador para inyectar la señal al circuito Caso.
+2. **Lazo Cerrado:** Se construyó el circuito Control, el restador, el controlador analógico (PID) y el circuito caso en retroalimentación con el restador y PID.
 3. **Comparación:** Se analizaron las diferencias entre la simulación y el circuito físico, atribuyendo las discrepancias a las tolerancias de los componentes, la resistencia interna del inductor y las limitaciones de los amplificadores operacionales.
 
 [Volver al contenido](#contenido)
@@ -227,7 +227,7 @@ Se implementó el siguiente código en Python (usando `control` y `matplotlib`) 
 
 - **Línea Control (Sana):** Alcanza el valor de referencia.
 - **Línea Caso (Lazo abierto):** Presenta una dinámica más lenta y menor amplitud.
-- **Línea Tratamiento (Caso con PI):** Logra estabilizarse y alcanza la referencia impuesta por el control, demostrando la eficacia del lazo cerrado.
+- **Línea Tratamiento (Caso con PID):** Logra estabilizarse y alcanza la referencia impuesta por el control, demostrando la eficacia del lazo cerrado.
 - Se verificó que las gráficas obtenidas en MATLAB, Simulink y Python son consistentes entre sí, validando el modelo matemático antes de la implementación física.
 
 [Volver al contenido](#contenido)
