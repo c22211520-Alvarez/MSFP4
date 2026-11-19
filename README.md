@@ -45,7 +45,7 @@ El modelado de sistemas fisiológicos permite comprender la dinámica del cuerpo
 
 Mediante la **analogía eléctrica**, se evalúan dos condiciones fisiológicas: un individuo sano (control, $R_2 = 100\text{ k}\Omega$, $C = 1\ \mu\text{F}$) y un caso simulado de alteración (caso, $R_2 = 1\text{ k}\Omega$, $C = 1000\ \mu\text{F}$). Utilizando la respuesta del individuo sano como referencia, se diseña un controlador para reducir el error. El desarrollo se realiza *in silico* mediante MATLAB/Simulink y Python, y se contrasta con la implementación física en el laboratorio de electrónica, complementado con un diagrama fisiológico elaborado en BioRender.
 
-**Palabras clave:** Sistema endócrino; Analogía eléctrica; Secreción hormonal; Controlador PI/PID; Simscape Electrical; Python; BioRender; Laboratorio de electrónica.
+**Palabras clave:** Sistema endócrino; Secreción hormonal; Dinámica Hormonal; Modelado Fisiológico; Simscape Electrical; Python; BioRender; Laboratorio de electrónica.
 
 [Volver al contenido](#contenido)
 
